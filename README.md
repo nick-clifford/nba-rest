@@ -1,6 +1,6 @@
 # Predicting when NBA Stars will rest
 
-*This was orginially a class project that I've been interested in continuing. All work is my own.*
+*This was orginially a group class project that I've been interested in continuing. I'm only including code that is my own*
 
 ![alt text](https://i.insider.com/5dc5e1623afd3701a027c603?width=1260&format=jpeg&auto=webp)
 ## Problem
