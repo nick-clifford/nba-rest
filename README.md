@@ -1,1 +1,1 @@
-# nba-rest-project
+# Predicting when NBA Stars will rest
