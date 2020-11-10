@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 pd.options.display.max_columns = 20
 
-datadir = '/Users/nickclifford/Documents/UVA/Spring 2020/SYS 6016 Machine Learning/final_proj/data'
+datadir = '/data'
 
 #%% Team data
 
@@ -153,10 +153,10 @@ def get_data(player_name):
 #%%
     
 
-lebron = get_data('lebron james')
-#lebron.to_csv('lebron.csv')
+# lebron = get_data('lebron james')
+# #lebron.to_csv('lebron.csv')
 
-lebron.head()
+# lebron.head()
 
-print("Lebron rest days: %d" %lebron.rest.sum())
-print("Lebron injured days: %d" %lebron.absent.sum())
+# print("Lebron rest days: %d" %lebron.rest.sum())
+# print("Lebron injured days: %d" %lebron.absent.sum())
