@@ -15,11 +15,12 @@ This article details the creation of the DNP-rest tactic started by the San Anto
 
 This study set out to examine the association between NBA players’ game schedules and their injuries experienced during the 2012-13 & 2014-15 regular seasons. A Poisson regression analysis was used to predict the number of injuries sustained by each player based on game schedules and the players’ profiles. They found that playing **back-to-back away games were significant predictors of frequent game injuries (p < 0.05)** and the **odds of such injuries were 3.5 times higher than the odds of those occurring in home games.** Working under the assumption that team coaches are aware of the added injury risk from back-to-back away games, I felt that incorporating this information into the model design is critical. 
 
-## Data Collection
+## Data
+### Collection
 The following project utilizes player & team-level NBA data from the past 5 years (2016-20). Due to the difficulty of finding a premade dataset that captures the key features for this project, the data must be collected from various sources and combined manually. 
 
 - On the player-level, I am only interested in players whom the topic at hand actually relates to. Therefore, I will subset all player data to those selected as All-Stars for the following seasons in question. For this, I turned to [basketball-reference.com](https://www.basketball-reference.com/)
-- [FiveThirtyEight](https://data.fivethirtyeight.com/) keeps a record of each NBA game, of which, we are interested in things like: teams played, home/away, points, date, and the pregame win probabilities of each team. [FiveThirtyEight](https://data.fivethirtyeight.com/) also publicly inlcudes the weekly probabilities that each team will make teh playoffs in their current season! 
+- [FiveThirtyEight](https://data.fivethirtyeight.com/) keeps a record of each NBA game, of which, we are interested in things like: teams played, points, date, and the pregame win probabilities of each team. [FiveThirtyEight](https://data.fivethirtyeight.com/) also publicly inlcudes the weekly probabilities that each team will make teh playoffs in their current season! 
 - Based on the findings of Teramoto et al (2017), we should also inlcude association between each team's travel distance before games. This [script from github user myzeiri](https://github.com/myzeiri/Distances-Between-Cities) queries WolframAlpha to return distances between cities, which I'll use to create a 30x30 distance matrix. 
 - Probably the most difficult task involves collecting the actual target variable: whether or not a player sat out their game. [Pro Sports Transactions](http://www.prosportstransactions.com/basketball/Search/Search.php) contains nearly all information on player inactivity in the NBA.
 
@@ -27,4 +28,17 @@ The following project utilizes player & team-level NBA data from the past 5 year
 1. **Can we predict when a player is going to rest a game from seasons 2016-18?**
 2. **Can we predict when a player is simply inactive (rest, injury, ejection, etc) from seasons 2016-20?**
 
-After I gather all pieces of the data, I [combine them](make_data.py) into larger player and team level datasets. 
+After I gather all pieces of the data (team, all-stars, inactivity/rest-labels), I [clean it up and combine them](make_data.py) into 2 datasets. Binary target variables for both are either 1 for a rested player or 1 (2016-18) for inactive (2016-20). 
+
+### Feature Engineering
+Once gathered, we can add some key features which might improve model performance. 
+
+- Number of days in-between games using date of games
+- Whether a set of games were part of a back-to-back schedule (binary)
+- Whether team was home or away (binary)
+- Team of interest's playoff probability as of the date of the game 
+
+
+## Methods
+
+
