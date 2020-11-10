@@ -1,6 +1,6 @@
 # Predicting when NBA Stars will rest
 
-*This was orginially a group class project that I've been interested in continuing. I'm only including code that is my own*
+*This was orginially a group class project that I've been interested in continuing. I'm only including work that is my own, and am currently in the process of rewriting all code that is not mine. This is still a work in progress.*
 
 ![alt text](https://i.insider.com/5dc5e1623afd3701a027c603?width=1260&format=jpeg&auto=webp)
 ## Problem
@@ -20,10 +20,11 @@ The following project utilizes player & team-level NBA data from the past 5 year
 
 - On the player-level, I am only interested in players whom the topic at hand actually relates to. Therefore, I will subset all player data to those selected as All-Stars for the following seasons in question. For this, I turned to [basketball-reference.com](https://www.basketball-reference.com/)
 - [FiveThirtyEight](https://data.fivethirtyeight.com/) keeps a record of each NBA game, of which, we are interested in things like: teams played, home/away, points, date, and the pregame win probabilities of each team. [FiveThirtyEight](https://data.fivethirtyeight.com/) also publicly inlcudes the weekly probabilities that each team will make teh playoffs in their current season! 
-- Based on the findings of Teramoto et al (2017), we should also inlcude association between each team's travel distance before games. This [script from user myzeiri](https://github.com/myzeiri/Distances-Between-Cities) queries WolframAlpha to return distances between cities, which I'll use to create a 30x30 distance matrix. 
+- Based on the findings of Teramoto et al (2017), we should also inlcude association between each team's travel distance before games. This [script from github user myzeiri](https://github.com/myzeiri/Distances-Between-Cities) queries WolframAlpha to return distances between cities, which I'll use to create a 30x30 distance matrix. 
 - Probably the most difficult task involves collecting the actual target variable: whether or not a player sat out their game. [Pro Sports Transactions](http://www.prosportstransactions.com/basketball/Search/Search.php) contains nearly all information on player inactivity in the NBA.
 
-**It should also be noted that NBA rules allowed players to miss a game for "rest" up until the 2018 season. Afterwards, players must have an official injury designation making it difficult to extract our player rest target variable. For the time being, I decided to split the question into 2 parts:**
+**It should also be noted that NBA rules allowed players to miss a game for "rest" up until the 2018 season. Afterwards, players must have an official injury designation making it difficult to extract our player rest target variable. For the time being, I've decided to split the question into 2 parts:**
 1. **Can we predict when a player is going to rest a game from seasons 2016-18?**
-2. **Can we predict when a player is simply inactive (rest, injury, ejection) from seasons 2016-20?**
+2. **Can we predict when a player is simply inactive (rest, injury, ejection, etc) from seasons 2016-20?**
 
+After I gather all pieces of the data, I [combine them](make_data.py) into larger player and team level datasets. 
