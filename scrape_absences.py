@@ -1,18 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Apr 30 16:24:18 2020
+# Nick Clifford
+# NBA Rest Proj
 
-@author: Nick Clifford
-"""
+# =============================================================================
+# This script creates the absences.csv file, which contains every instance an NBA 
+# player was relinquished from or added back onto the active roster from the start 
+# of the 2015-16 season to present, along with a description for why the player
+# was removed. This is done by scraping the Pro Sports Transactions website. 
+# =============================================================================
 
-#%% Import modules
+#%% Setup
 
 import requests
 import pandas as pd
 from tqdm import tqdm
 from bs4 import BeautifulSoup
-#%% Get list of urls to crawl
+
+# path to the data directory
+datadir = 'data/'
+
+
+#%% Get list of URLs to crawl
 
 # Pro Sports Transaction and search player missed games from 2015 to present
 url = 'http://www.prosportstransactions.com/basketball/Search/SearchResults.php?Player=&Team=&BeginDate=2015-10-27&EndDate=&ILChkBx=yes&InjuriesChkBx=yes&PersonalChkBx=yes&DisciplinaryChkBx=yes&Submit=Search'
@@ -29,11 +38,12 @@ for a in link_table.find_all('a',href=True):
 
 print('Number of page links: %d' %(len(link_list)))
 
-#%% Get Table
+#%% Scrape Absence Table
 
-
+# Initialize dict where key:list pair is a column of the dataset
 table_dict = {'date':[], 'team':[], 'player':[], 'action':[], 'notes':[]}
 
+# crawl through every results page
 for link in tqdm(link_list, unit='page', position=0, leave=True):
     # retrieve html text from url
     response = requests.get('http://www.prosportstransactions.com/basketball/Search/' + link)
@@ -68,12 +78,7 @@ for link in tqdm(link_list, unit='page', position=0, leave=True):
         table_dict['action'].append(action)
         table_dict['notes'].append(notes)
 
+# convert dict to DataFrame 
 df = pd.DataFrame.from_dict(table_dict)
-df.to_csv('data/abscences.csv')
-
-
-#%% Look at data
-
-df.date = pd.to_datetime(df.date)
-
-df.query('player == "LeBron James"')
+# write DataFrame to .csv file
+df.to_csv(datadir+'abscences.csv')
