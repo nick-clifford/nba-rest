@@ -35,10 +35,10 @@ Once gathered, we can add some key features which might improve model performanc
 
 - Number of days in-between games using date of games
 - Whether a set of games were part of a back-to-back schedule (binary)
-- Whether team was home or away (binary)
+- Whether the team was home or away (binary)
 - Team of interest's playoff probability as of the date of the game 
 
 
 ## Methods
-
+Since the likelihood that a given player participates in a particular game is time-dependent, we shall develop a predictive model using recurrent neural network architecture. We want to compare the accuracy of this model to one using logistic regression. Inputs to the model will include features of the player and team immediately before the game as well as the value of said features before previous games. This being a classification problem the final layer will have a sigmoidal activation function and the model will look to minimize binary cross-entropy
 
